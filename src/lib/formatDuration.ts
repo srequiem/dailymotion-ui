@@ -1,4 +1,3 @@
-// 423 -> "7:03", 3725 -> "1:02:05"
 export const formatDuration = (seconds: number): string => {
   if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
   const total = Math.floor(seconds);

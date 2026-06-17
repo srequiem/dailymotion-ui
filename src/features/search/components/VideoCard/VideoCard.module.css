@@ -1,7 +1,7 @@
 .card {
   display: block;
   width: 100%;
-  max-width: 305px; /* never exceed this width */
+  max-width: 305px;
 }
 
 .thumb {

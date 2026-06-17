@@ -1,4 +1,5 @@
 import { useLikes } from "../../hooks/useLikes";
+
 import styles from "./LikeButton.module.css";
 
 type LikeButtonProps = {

@@ -1,8 +1,4 @@
-// Modèle de domaine de l'app
 
-// Valeurs officielles du paramètre `channel` (catégories), confirmées sur
-// https://developers.dailymotion.com/reference/video-categories
-// Voir pour utiliser plus que ce que j'ai pris
 export const CHANNEL_CATEGORIES = [
   "animals",
   "auto",

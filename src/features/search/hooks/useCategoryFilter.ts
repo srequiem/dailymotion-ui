@@ -2,8 +2,6 @@ import { useCallback, useState } from "react";
 
 import type { ChannelCategory } from "@/lib/types";
 
-// Une seule catégorie active à la fois, persistée pour survivre au refresh.
-// Recliquer la catégorie déjà activée la retire (toggle-to-clear).
 const STORAGE_KEY = "dm:active-category";
 
 const readStored = (): ChannelCategory | null => {
@@ -19,7 +17,6 @@ const writeStored = (category: ChannelCategory | null) => {
     if (category) localStorage.setItem(STORAGE_KEY, category);
     else localStorage.removeItem(STORAGE_KEY);
   } catch {
-    // écriture impossible (navigation privée, quota) -> on ignore silencieusement
   }
 };
 
