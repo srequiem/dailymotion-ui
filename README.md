@@ -2,7 +2,8 @@
 
 A small two-page video browsing experience built on the public
 [Dailymotion API](https://developers.dailymotion.com/api/): search and browse
-videos, then open one to watch it with its details and a like toggle.
+videos by category, then open one to watch it with its details and a like
+toggle. Coded With all my heart.
 
 ## Run it
 
@@ -41,9 +42,13 @@ src/
 ├── components/ui/    # shared primitives (Button, Spinner, EmptyState)
 └── features/
     ├── header/       # brand wordmark
-    ├── search/       # SearchPage + SearchBar, VideoGrid, VideoCard, useVideoSearch
+    ├── search/       # SearchPage + SearchBar, Filters, VideoGrid, VideoCard, useVideoSearch, useCategoryFilter
     └── video/        # VideoPage + VideoPlayer, VideoMeta, LikeButton, useVideo, useLikes
 ```
+
+### What to check first ?
+
+The 'SearchPage' feature is the home page, so make sure to check the code first, it's good starting point
 
 Two ideas drive it:
 
@@ -53,6 +58,25 @@ Two ideas drive it:
 - **The search query lives in the URL** (`/?q=…`). It's the single source of
   truth, which makes searches shareable and the back button work for free.
 
+## UI touches
+
+A few things added because a "considered" UI felt like part of the brief, not
+just a working one:
+
+- The video grid is a **masonry layout** (CSS `column-width`, no JS) — closer
+  to a Pinterest feed than a uniform grid. 🧱 With mode time, i will 3 differents
+  height for the card to match a perfect "Pinterest style"
+- Check the filters if you wanna have fun
+- The header and search bar + category filter pills both have a **frosted-glass
+  treatment**
+  ✨ All purely decorative — `prefers-reduced-motion` turns
+  it off, and `aria-pressed` (not color) is the real source of truth for which
+  filter is active.
+- **Responsive header, mobile-first:** below 920px the search bar moves out of
+  the header and sits under the "Find something worth watching" title; the
+  header keeps just the logo and a search icon that scrolls down to it. From
+  920px up, the bar moves back into the header, centered.
+
 ## Key decisions & tradeoffs
 
 - **Data layer:** TanStack Query handles caching, loading/error states, and
@@ -61,6 +85,13 @@ Two ideas drive it:
 - **Default feed:** an empty search page would feel broken, so the landing shows
   a *Trending now* feed (`sort=trending`); searching swaps to relevance-sorted
   results.
+- **Category filters:** the API's `channel` parameter doubles as a category
+  filter (verified against the [official list](https://developers.dailymotion.com/reference/video-categories) —
+  e.g. there's no `food`, the closest real value is `lifestyle`). Search text
+  and category compose into one request rather than being two separate
+  fetch functions. The active category is local state persisted to
+  `localStorage` (one at a time; clicking it again clears it), so it survives
+  a refresh — same pattern as the like toggle.
 - **Embedding:** the video page uses Dailymotion's iframe player
   (`geo.dailymotion.com/player.html?video=…`) — zero configuration. The JS Player
   SDK would allow listening to player events and controlling playback
@@ -77,8 +108,11 @@ I tested where bugs are most likely and most costly, not for coverage's sake:
   off-by-one). Fast and deterministic.
 - **`useLikes`** — the core stateful logic of the feature, including persistence
   across hook instances.
+- **`useCategoryFilter`** — same shape as `useLikes`: toggle on/off, only one
+  active at a time, persists across instances.
 - **`useVideoSearch`** — the data layer, with `fetch` mocked: verifies the
-  default-vs-search branching, the request URL, and the API → domain mapping.
+  default-vs-search branching, the category filter composing into the request,
+  and the API → domain mapping.
 
 I deliberately skipped pixel/markup tests on presentational components — low
 value and brittle. With more time I'd add a Playwright smoke test for the
@@ -86,6 +120,7 @@ search → open video → like flow end to end.
 
 ## With more time
 
+- Using api premium to make a preview on "Hover" of the grid item ?
 - Pagination / infinite scroll (the API exposes `has_more` + `page`).
 - Skeleton loaders instead of a spinner.
 - Explicit handling of non-embeddable / geo-blocked videos.

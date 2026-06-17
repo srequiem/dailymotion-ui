@@ -1,6 +1,6 @@
 :root {
-  --background: #0b0d12;
-  --foreground: #eef1f6;
+  --background: #111;
+  --foreground: #f7f7f7;
   --surface: #14171f;
   --surface-2: #1c212c;
   --borderColor: rgba(255, 255, 255, 0.08);
@@ -12,13 +12,6 @@
   --maxw: 1240px;
   --font-display: "Archivo", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #111;
-    --foreground: #f7f7f7;
-  }
 }
 
 * {

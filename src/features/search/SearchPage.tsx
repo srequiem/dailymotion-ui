@@ -30,7 +30,7 @@ const SearchPage = () => {
   return (
     <main className={`container ${styles.page}`}>
       <section className={styles.hero}>
-        <h1 className={styles.headline}>Find something worth watching.</h1>
+        <h1 className={styles.headline}>Find something worth watching<span>.</span></h1>
         <div id="mobile-search" className={styles.mobileSearch}>
           <SearchBar initialValue={query} onSearch={handleSearch} />
         </div>

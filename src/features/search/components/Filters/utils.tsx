@@ -6,8 +6,8 @@ export const handlePointerMove = (event: MouseEvent<HTMLButtonElement>) => {
   const px = (event.clientX - rect.left) / rect.width; // 0 -> 1
   const py = (event.clientY - rect.top) / rect.height;
 
-  const tiltX = (py - 0.5) * -14; // degrés
-  const tiltY = (px - 0.5) * 14;
+  const tiltX = (py - 0.5) * -34; // degrés
+  const tiltY = (px - 0.5) * 34;
 
   el.style.setProperty("--tiltX", `${tiltX.toFixed(2)}deg`);
   el.style.setProperty("--tiltY", `${tiltY.toFixed(2)}deg`);

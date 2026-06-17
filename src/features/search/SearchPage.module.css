@@ -20,6 +20,9 @@
   user-select: none;
 }
 
+.headline span {
+  color: var(--blue-light);
+}
 
 .filters {
   display: flex;

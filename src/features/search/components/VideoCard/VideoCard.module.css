@@ -6,12 +6,18 @@
 
 .thumb {
   position: relative;
-  aspect-ratio: 9/16;
+  aspect-ratio: 16/9;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--surface);
   width: 100%;
   max-height: 450px;
+}
+
+@media (min-width: 623px) {
+  .thumb {
+    aspect-ratio: 9/16;
+  }
 }
 
 .thumb img {

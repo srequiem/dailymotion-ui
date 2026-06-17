@@ -33,6 +33,7 @@
 }
 
 .motion {
+  font-style: italic;
   font-weight: 800;
   color: var(--blue-light);
 }
