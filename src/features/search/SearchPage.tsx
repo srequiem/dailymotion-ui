@@ -8,21 +8,36 @@ import Spinner from "@/components/ui/Spinner";
 import SearchBar from "./components/SearchBar";
 import VideoGrid from "./components/VideoGrid";
 
+import { useCategoryFilter } from "./useCategoryFilter";
 import { useVideoSearch } from "./useVideoSearch";
 
 import styles from "./SearchPage.module.css";
 
+const CATEGORY_LABELS: Record<string, string> = {
+  news: "News",
+  music: "Music",
+  sport: "Sport",
+  videogames: "Video games",
+  travel: "Travel",
+  tv: "TV Shows",
+};
+
 const SearchPage = () => {
   const [params, setParams] = useSearchParams();
   const query = params.get("q") ?? "";
+  const { category, toggle } = useCategoryFilter();
 
-  const { data, isLoading, isError, isFetching, refetch } = useVideoSearch(query);
+  const { data, isLoading, isError, isFetching, refetch } = useVideoSearch(query, category);
 
   const handleSearch = (value: string) => {
     setParams(value ? { q: value } : {}, { replace: false });
   };
 
-  const heading = query ? `Results for “${query}”` : "";
+  const heading = query
+    ? `Results for “${query}”`
+    : category
+      ? CATEGORY_LABELS[category]
+      : "";
 
   return (
     <main className={`container ${styles.page}`}>
@@ -32,7 +47,7 @@ const SearchPage = () => {
           <SearchBar initialValue={query} onSearch={handleSearch} />
         </div>
         <div className={styles.filters}>
-          <Filters />
+          <Filters active={category} onToggle={toggle} />
         </div>
       </section>
 

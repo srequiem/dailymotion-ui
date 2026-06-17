@@ -87,18 +87,33 @@ const listParams = (extra: Record<string, string>, page: number): string =>
     ...extra,
   }).toString();
 
+type VideoQuery = {
+  search?: string;
+  channel?: string; // valeur du paramètre `channel` (catégorie) — voir CHANNEL_CATEGORIES
+  page?: number;
+};
 
-export const getDefaultVideos = async (page = 1): Promise<VideoListResponse> => {
-  const raw = await request<RawList>(`/videos?${listParams({ sort: "trending", channel: "music" }, page)}`);
+// Compose les deux dimensions de filtrage (texte libre + catégorie) au lieu de
+// dupliquer la logique de requête dans une fonction par cas. Une recherche
+// texte est triée par pertinence ; sinon (catégorie seule ou feed par défaut)
+// on trie par tendance.
+export const getVideos = async ({ search, channel, page = 1 }: VideoQuery): Promise<VideoListResponse> => {
+  const trimmed = search?.trim();
+  const extra: Record<string, string> = trimmed
+    ? { search: trimmed, sort: "relevance" }
+    : { sort: "trending" };
+  if (channel) extra.channel = channel;
+
+  const raw = await request<RawList>(`/videos?${listParams(extra, page)}`);
   return toListResponse(raw);
 };
 
-export const searchVideos = async (query: string, page = 1): Promise<VideoListResponse> => {
-  const raw = await request<RawList>(
-    `/videos?${listParams({ search: query, sort: "relevance" }, page)}`
-  );
-  return toListResponse(raw);
-};
+// Wrappers conservés pour compatibilité avec le code/tests existants.
+export const getDefaultVideos = async (page = 1): Promise<VideoListResponse> =>
+  getVideos({ page });
+
+export const searchVideos = async (query: string, page = 1): Promise<VideoListResponse> =>
+  getVideos({ search: query, page });
 
 export const getVideo = async (id: string): Promise<VideoDetails> => {
   const raw = await request<RawVideo>(

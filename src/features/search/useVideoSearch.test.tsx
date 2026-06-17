@@ -67,4 +67,16 @@ describe("useVideoSearch", () => {
     expect(String(fetchMock.mock.calls[0][0])).toContain("search=cats");
     expect(result.current.data?.list[0].title).toBe("Cats");
   });
+
+  it("filters by category (channel param) when a category is active and there is no text query", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(mockOk([]));
+    vi.stubGlobal("fetch", fetchMock);
+
+    const { result } = renderHook(() => useVideoSearch("", "sport"), { wrapper: createWrapper() });
+
+    await waitFor(() => expect(result.current.isSuccess).toBe(true));
+    const requestUrl = String(fetchMock.mock.calls[0][0]);
+    expect(requestUrl).toContain("channel=sport");
+    expect(requestUrl).toContain("sort=trending"); // pas de texte -> tri par tendance, catégorie en plus
+  });
 });
