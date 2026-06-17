@@ -7,7 +7,6 @@
   border-bottom: 1px solid var(--borderColor);
 }
 
-/* Mobile-first: logo on the left, search-trigger icon on the right (opposite end). */
 .headerContent {
   display: flex;
   align-items: center;
@@ -23,9 +22,9 @@
 
 .title {
   font-family: var(--font-display);
-  font-size: 22px;
   letter-spacing: -0.02em;
   display: inline-flex;
+  font-size: 24px;
 }
 
 .daily {
@@ -38,12 +37,10 @@
   color: var(--blue-light);
 }
 
-/* The real search bar: hidden in the header until the desktop breakpoint. */
 .search {
   display: none;
 }
 
-/* Mobile-only trigger that jumps to the search bar under the hero title. */
 .searchTrigger {
   display: flex;
   align-items: center;
@@ -57,8 +54,15 @@
   flex-shrink: 0;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
-.searchTrigger:hover { background: var(--surface-2); }
-.searchTrigger svg { width: 18px; height: 18px; }
+
+.searchTrigger:hover {
+  background: var(--surface-2);
+}
+
+.searchTrigger svg {
+  width: 18px;
+  height: 18px;
+}
 
 @media (min-width: 920px) {
   .headerContent {
