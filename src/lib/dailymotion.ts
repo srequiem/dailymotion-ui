@@ -89,14 +89,10 @@ const listParams = (extra: Record<string, string>, page: number): string =>
 
 type VideoQuery = {
   search?: string;
-  channel?: string; // valeur du paramètre `channel` (catégorie) — voir CHANNEL_CATEGORIES
+  channel?: string;
   page?: number;
 };
 
-// Compose les deux dimensions de filtrage (texte libre + catégorie) au lieu de
-// dupliquer la logique de requête dans une fonction par cas. Une recherche
-// texte est triée par pertinence ; sinon (catégorie seule ou feed par défaut)
-// on trie par tendance.
 export const getVideos = async ({ search, channel, page = 1 }: VideoQuery): Promise<VideoListResponse> => {
   const trimmed = search?.trim();
   const extra: Record<string, string> = trimmed
@@ -108,7 +104,6 @@ export const getVideos = async ({ search, channel, page = 1 }: VideoQuery): Prom
   return toListResponse(raw);
 };
 
-// Wrappers conservés pour compatibilité avec le code/tests existants.
 export const getDefaultVideos = async (page = 1): Promise<VideoListResponse> =>
   getVideos({ page });
 
