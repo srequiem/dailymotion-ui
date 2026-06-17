@@ -1,6 +1,9 @@
-import Button from "@/components/ui/Button/Button";
+import { useRef } from "react";
 
+import Button from "@/components/ui/Button/Button";
 import type { ChannelCategory } from "@/lib/types";
+
+import { handlePointerMove, resetTilt } from "./utils";
 
 import styles from "./Filters.module.css";
 
@@ -21,20 +24,32 @@ type FiltersProps = {
 };
 
 const Filters = ({ active, onToggle }: FiltersProps) => {
+  const groupRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className={styles.filtersContainer} role="group" aria-label="Filter by category">
+    <div
+      ref={groupRef}
+      className={styles.filtersContainer}
+      role="group"
+      aria-label="Filter by category"
+    >
       {FILTER_OPTIONS.map((option) => {
         const isActive = active === option.value;
+        const classes = [styles.glassButton, isActive ? styles.active : ""]
+          .filter(Boolean)
+          .join(" ");
+
         return (
           <Button
             key={option.value}
             type="button"
-            variant={isActive ? "primary" : "ghost"}
-            className={styles.filterButton}
+            className={classes}
             aria-pressed={isActive}
             onClick={() => onToggle(option.value)}
+            onMouseMove={handlePointerMove}
+            onMouseLeave={resetTilt}
           >
-            {option.label}
+            <span className={styles.label}>{option.label}</span>
           </Button>
         );
       })}
