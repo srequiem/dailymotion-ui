@@ -1,12 +1,12 @@
 import { Link, useParams } from "react-router-dom";
 
-import Button from "@/components/ui/Button";
-import EmptyState from "@/components/ui/EmptyState";
-import Spinner from "@/components/ui/Spinner";
+import Button from "@/components/ui/Button/Button";
+import EmptyState from "@/components/ui/EmptyState/EmptyState";
+import Spinner from "@/components/ui/Spinner/Spinner";
 
 import VideoMeta from "./components/VideoMeta";
 import VideoPlayer from "./components/VideoPlayer";
-import { useVideo } from "./useVideo";
+import { useVideo } from "./hooks/useVideo";
 import styles from "./VideoPage.module.css";
 
 const VideoPage = () => {

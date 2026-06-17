@@ -1,26 +1,17 @@
 import { useSearchParams } from "react-router-dom";
 
-import Button from "@/components/ui/Button";
-import EmptyState from "@/components/ui/EmptyState";
+import Button from "@/components/ui/Button/Button";
+import EmptyState from "@/components/ui/EmptyState/EmptyState";
 import Filters from "./components/Filters";
-import Spinner from "@/components/ui/Spinner";
+import Spinner from "@/components/ui/Spinner/Spinner";
 
 import SearchBar from "./components/SearchBar";
 import VideoGrid from "./components/VideoGrid";
 
-import { useCategoryFilter } from "./useCategoryFilter";
-import { useVideoSearch } from "./useVideoSearch";
+import { useCategoryFilter } from "./hooks/useCategoryFilter";
+import { useVideoSearch } from "./hooks/useVideoSearch";
 
 import styles from "./SearchPage.module.css";
-
-const CATEGORY_LABELS: Record<string, string> = {
-  news: "News",
-  music: "Music",
-  sport: "Sport",
-  videogames: "Video games",
-  travel: "Travel",
-  tv: "TV Shows",
-};
 
 const SearchPage = () => {
   const [params, setParams] = useSearchParams();
@@ -34,10 +25,7 @@ const SearchPage = () => {
   };
 
   const heading = query
-    ? `Results for “${query}”`
-    : category
-      ? CATEGORY_LABELS[category]
-      : "";
+    ? `Results for “${query}”` : "";
 
   return (
     <main className={`container ${styles.page}`}>

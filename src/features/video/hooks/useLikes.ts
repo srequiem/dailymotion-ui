@@ -18,7 +18,6 @@ export const useLikes = (videoId: string) => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify([...liked]));
     } catch {
-      // Erreur de stockage, on pourrait logguer l'erreur ici si besoin
     }
   }, [liked]);
 
