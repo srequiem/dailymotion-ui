@@ -1,0 +1,53 @@
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 560px;
+  padding: 14px 20px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--surface) 70%, white 6%),
+    color-mix(in srgb, var(--surface) 85%, transparent)
+  );
+  border: 1px solid color-mix(in srgb, white 14%, var(--borderColor));
+  border-radius: 999px;
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 6px 24px rgba(0, 0, 0, 0.18);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.bar:focus-within {
+  border-color: var(--blue);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 0 3px color-mix(in srgb, var(--blue) 22%, transparent);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--foreground);
+  font-size: 16px;
+  outline: none;
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+.input::placeholder {
+  color: var(--muted);
+}

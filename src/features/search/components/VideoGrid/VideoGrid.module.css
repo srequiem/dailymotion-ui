@@ -1,0 +1,35 @@
+.grid {
+  column-width: 256px;
+  column-gap: 1rem;
+  max-width: calc(305px * 3 + 2rem);
+  width: fit-content; /* shrink-wrap to columns */
+  width: -webkit-fit-content;
+  margin: 0 auto;
+  padding: 0 0.5rem;
+}
+
+@media (min-width: 623px) {
+  .grid {
+    column-count: 1;
+  }
+}
+
+@media (min-width: 624px) and (max-width: 877px) {
+  .grid {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 878px) {
+  .grid {
+    column-count: 3;
+  }
+}
+
+.item {
+  width: 100%;
+  max-width: 305px;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  margin: 0 auto 28px;
+}

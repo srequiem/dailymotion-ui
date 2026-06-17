@@ -1,0 +1,18 @@
+.videoPageContainer {
+  padding: 24px 24px 80px;
+  padding-bottom: 80px;
+  max-width: 960px;
+}
+
+.back {
+  display: inline-block;
+  margin: 20px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.back:hover {
+  color: var(--foreground);
+}

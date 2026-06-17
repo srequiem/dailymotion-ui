@@ -1,0 +1,49 @@
+.meta {
+  padding-top: 24px;
+}
+
+.headRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(20px, 3vw, 28px);
+  line-height: 1.2;
+}
+
+.channel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.channelName {
+  margin: 0;
+  font-weight: 600;
+}
+
+.sub {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.description {
+  margin: 24px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--borderColor);
+  color: var(--foreground);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}

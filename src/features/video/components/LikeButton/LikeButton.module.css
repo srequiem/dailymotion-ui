@@ -1,0 +1,46 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--borderColor);
+  background: var(--surface);
+  color: var(--foreground);
+  font-weight: 600;
+  flex-shrink: 0;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.button:hover {
+  background: var(--surface-2);
+}
+
+.heart {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+.liked {
+  color: var(--like);
+  border-color: color-mix(in srgb, var(--like) 50%, transparent);
+}
+
+.liked .heart {
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+
+  40% {
+    transform: scale(1.35);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
