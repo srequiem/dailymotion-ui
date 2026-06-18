@@ -118,6 +118,12 @@ I deliberately skipped pixel/markup tests on presentational components — low
 value and brittle. With more time I'd add a Playwright smoke test for the
 search → open video → like flow end to end.
 
+I also skipped the onHover preview on the video item list because i tried to
+reach the API with `preview_480p_url` but i get a `403`. It seems that all the
+brut medias links (preview, HLS, MP4) are protected and asks for an OAuth,
+Which is out from 'API publique sans clé'. To go further, it could be fun to
+get a partner api link or a fallback iframe on Hover, but the Iframe is heavy.
+
 ## With more time
 
 - Using api premium to make a preview on "Hover" of the grid item ?
